@@ -1,0 +1,12 @@
+##############
+# MTweet apiKey Configulation
+# Please set the following information that can be obtained from the Twitter developer screen here.
+# ・API Key and Secret
+# ・Access Token and Secret
+###############
+
+
+apiKey: ""
+apiKeySecret: ""
+oauthClientId: ""
+oauthClientSecret: ""
