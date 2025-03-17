@@ -38,6 +38,7 @@ public class MTweetClient extends TwitterClient {
 
       // ツイッターで受け付けられるはずの改行コードが勝手にパース置換されてしまうため、それを解除する
       body = body.replaceAll("\\\\n", "\\n");
+      this.setAutomaticRetry(false);
       return (Tweet)this.getRequestHelperV1().postRequestWithBodyJson(url, new HashMap(), body, TweetV2.class).orElseThrow(
           NoSuchElementException::new);
     } catch (Throwable var4) {
