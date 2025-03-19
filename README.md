@@ -3,10 +3,10 @@
 MTweetは、Minecraft内からTwitterにツイートを送信することを目的にしたプラグインです。</br>
 Skriptといった別プラグインから文章を連携し、1つのアカウントから呟かせることを想定して作成されています。</br>
 ニコニコ生放送から情報を取得して、ツイート本文を作成することも可能です。</br>
-
+</br>
 # 対応バージョン
-Spigot1.21.1以降対応です。
-
+Spigot1.21.1以降対応です。</br>
+</br>
 # 事前準備
 1.Twitterの開発者登録をしたうえで、keys.ymlの以下の項目に設定を入れてください。</br>
 　apiKey、apiKeySecret　→　Twitterの開発者登録後、API Key and Secret　の値をそれぞれ</br>
