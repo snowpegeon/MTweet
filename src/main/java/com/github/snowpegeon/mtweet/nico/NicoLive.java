@@ -3,19 +3,29 @@ package com.github.snowpegeon.mtweet.nico;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+/**
+ * ニコ生ライブ情報取得.
+ */
 public class NicoLive {
+  // ライブID
   private String liveId;
 
+  // ライブURL
   private String liveUrl;
 
+  // ライブタイトル
   private String title;
 
+  // 配信者のユーザー名
   private String userName;
 
+  // 配信者のユーザーID
   private String userId;
 
+  // 配信者のユーザーアイコン
   private String userIcon;
 
+  // ライブサムネイル
   private String largeThumbnail;
 
   private LocalDateTime createdAt;

@@ -22,14 +22,14 @@ public class MTweetClient extends TwitterClient {
   }
 
   /**
-   * ツイート送信.
+   * ツイート送信(テキストのみ).
    */
   public Tweet postTweet(String text) {
     return this.postTweet(TweetParameters.builder().text(text).build());
   }
 
   /**
-   * ツイート送信.
+   * ツイート送信(Twitterパラメータ).
    */
   public Tweet postTweet(TweetParameters tweetParameters) {
     try {

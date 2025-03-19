@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
@@ -30,6 +31,8 @@ public class MTweetCommand implements CommandExecutor {
   public MTweetPlugin plugin;
   public Logger logger;
   public HashMap<String,TwitterCredentials> credentials = new HashMap<>();
+
+  private Pattern numRegex = Pattern.compile("^[0-9]{1,9}$");
 
   /**
    * コンストラクタ.
@@ -52,6 +55,11 @@ public class MTweetCommand implements CommandExecutor {
       if(strings[0].equalsIgnoreCase("tweet")){
         String[] strLists = Arrays.copyOfRange(strings, 1, strings.length);
         String str = String.join(" ", strLists);
+        // 文字列設定チェック
+        if(str.length() == 0){
+          commandSender.sendMessage("ツイート本文が設定されていません。設定した上で再度コマンドを実行してください。");
+          return true;
+        }
         res = sendTweet(str);
         if(Objects.nonNull(res)){
           logger.info("ツイート送信に成功しました。");
@@ -66,8 +74,19 @@ public class MTweetCommand implements CommandExecutor {
       // ニコ生ツイート処理
       } else if(strings[0].equalsIgnoreCase("livetweet")){
         String liveAccount = strings[1];
+        // ニコニコユーザーID形式チェック
+        if(!numRegex.matcher(liveAccount).matches()){
+          commandSender.sendMessage("ニコニコユーザーIDの形式が誤っています。数字のみ。1～9桁の範囲におさまっているかをご確認ください。");
+          return true;
+        }
+
         String[] strLists = Arrays.copyOfRange(strings, 2, strings.length);
         String str = String.join(" ", strLists);
+        // 文字列設定チェック
+        if(str.length() == 0){
+          commandSender.sendMessage("ツイート本文が設定されていません。設定した上で再度コマンドを実行してください。");
+          return true;
+        }
         res = sendLiveTweet(liveAccount, str);
         if(Objects.nonNull(res)){
           logger.info("ニコ生ツイート送信に成功しました。");
@@ -129,13 +148,15 @@ public class MTweetCommand implements CommandExecutor {
    */
   private String sendLiveTweet(String account, String str) {
 
+    // ニコ生情報取得
     String liveUrl = NicoLiveClient.getLiveUrl(account);
     String title = NicoLiveClient.getTitle(account);
     if(Objects.isNull(liveUrl) || Objects.isNull(title)) {
-      logger.severe("ニコ生配信詳細情報取得に失敗しました。");
+      logger.severe("ニコ生配信詳細情報取得に失敗しました。後ほどお試しください。");
       return null;
     }
 
+    // ツイート本文作成並びに送信
     String tweet = str.replaceAll("\\[liveUrl\\]", liveUrl);
     tweet = tweet.replaceAll("\\[title\\]", title);
     return sendTweet(tweet);
