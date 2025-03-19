@@ -10,7 +10,7 @@ apiKey: ""
 apiKeySecret: ""
 oauthClientId: ""
 oauthClientSecret: ""
-nicoUrl: "https://live.nicovideo.jp/front/api/v1/user-broadcast-history?providerId=[account]&providerType=user&limit=1"
+nicoUrl: "https://live.nicovideo.jp/front/api/v2/user-broadcast-history?providerId=[account]&providerType=user&isIncludeNonPublic=false&offset=0&limit=1&withTotalCount=true"
 nicoLiveUrl: "https://live.nicovideo.jp/watch/[liveId]"
 nicoCacheTime: 1
 tweetUserId: "mctest1011408"
